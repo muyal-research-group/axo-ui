@@ -16,29 +16,37 @@
                 >
             </v-img>
 
-            <v-card-title class="text-h6 text-md-h5 text-lg-h4 text-decoration-underline">AXO</v-card-title>
-            <v-card-subtitle>User Login</v-card-subtitle>
+            <v-card-title class="text-h6 text-md-h5 text-lg-h4">AXO</v-card-title>
 
             <v-form fast-fail @submit.prevent class="w-100">
-
+                        
+                <v-text-field
+                    v-model="name"
+                    :rules="nameRules"
+                    label="Name"
+                ></v-text-field>
                 <v-text-field
                     v-model="username"
                     :rules="usernameRules"
-                    label="User"
+                    label="Username"
                 ></v-text-field>
-
                 <v-text-field
                     v-model="password"
                     :rules="passwordRules"
                     label="Password"
                 ></v-text-field>
+                <v-text-field
+                    v-model="passwordConfirmation"
+                    :rules="passwordConfirmationRules"
+                    label="Confirm Password"
+                ></v-text-field>
 
                 <div class="d-flex rounded w-100 justify-center align-center">
 
-                    <v-btn class=" w-50 bg-black text-white mr-8" type="submit" >Sign In</v-btn>
+                    <v-btn class=" w-50 bg-black text-white mr-8" type="submit" >Sign Up</v-btn>
 
-                    <router-link to="/register" class="text-decoration-none w-50">
-                    Sign Up
+                    <router-link to="/" class="text-decoration-none w-50">
+                    Sign In
                     </router-link>
 
                 </div>
