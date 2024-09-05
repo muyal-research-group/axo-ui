@@ -10,14 +10,19 @@
   <v-app>
     <v-layout class="rounded rounded-md urbanist-font">
   <!-- barra -->
-    <v-app-bar app class="bg-color text-center text-white">
-   <!--  <v-toolbar-title> {{ currentOptions.title }} </v-toolbar-title> -->
-    <v-spacer></v-spacer>
-    <v-btn :to="currentOptions.route" v-if="currentOptions.button" right>{{ currentOptions.button }}</v-btn>
+  <v-app-bar app class="bg-color text-white">
+    <div class="d-flex justify-start">
+      <v-img
+        :width="60"
+        :src="require('@/assets/logo-civestav-white.png')"
+        class=" ml-5"
+      ></v-img>
+    </div>
+
     </v-app-bar>
 
     <!-- contenido -->
-    <v-main>
+    <v-main class= "bg-color-main">
       <RouterView />
     </v-main>
 
@@ -37,24 +42,17 @@
 export default {
   name: 'App',
   data() {
-    return {
-      navOptions: {
-        '/': { title: 'Inicio', button: 'Sign Up', route: '/register'},
-        '/register': { title: 'Register', button: 'Sign In', route:'/login'}
-      }
-    };   
-  },
-  computed: {
-      currentOptions() {
-        return this.navOptions[this.$route.path] || {};
-      }
-    }
+    
+    } 
 }
 </script>
 
 <style scoped>
 .bg-color{
-    background-color: #0f0c24ff;
+    background-color: #06141B;
+}
+.bg-color-main{
+  background-color: #EEEAEA;
 }
 .urbanist-font {
   font-family: "Urbanist", sans-serif;
