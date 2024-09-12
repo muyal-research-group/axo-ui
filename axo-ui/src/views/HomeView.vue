@@ -1,44 +1,37 @@
+
 <template>
-    <v-navigation-drawer
+    <v-navigation-drawer app
         expand-on-hover
         rail
+        class="bg-color-nav-drawer"
         >
-        <v-list>
-            <v-list-item
-                prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
-                subtitle="sandra_a88@gmailcom"
-                title="Sandra Adams"
-            ></v-list-item>
-        </v-list>
-
         <v-divider></v-divider>
-
-        <v-list density="compact" nav>
-            <v-list-item prepend-icon="mdi-folder" title="My Files" value="myfiles"></v-list-item>
-            <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared"></v-list-item>
-            <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
+            
+        <v-list density="compact" nav class=" text-white">
+            <v-list-item prepend-icon="mdi-home" title="Home" value="home"></v-list-item>
+            <v-list-item prepend-icon="mdi-folder" title="My Objects" value="myOjects"></v-list-item>
+            <v-list-item prepend-icon="mdi-cube" title="My Virtual Enviroment" value="myEnviroment"></v-list-item>
+            <v-list-item prepend-icon="mdi-grid" title="My Endpoints" value="myEndpoints"></v-list-item>
+     
+            <v-spacer></v-spacer>
+            <v-spacer></v-spacer> 
+            <v-list-item prepend-icon="mdi-logout" title="Log Out" value="logout"></v-list-item>
         </v-list>
-        </v-navigation-drawer>
-
-    <v-main class="d-flex-column align-center justify-center"
+    </v-navigation-drawer>
+    <!-- main -->
+    <v-main class="d-flex-column justify-center align-start pa-5"
         style="min-height: 300px;"
         >
-        <div class="d-flex justify-center">
-            <v-sheet class=" w-50">
-            <h1>Posts</h1>
-                <div v-for="post in posts" :key="post.id">
-                    <h2>{{ post.id }} {{ post.title }}</h2>
-                    <p>{{ post.body }}</p>
-                </div>
-        </v-sheet>
-        <v-sheet class=" w-50">
-            <h1>Users</h1>
-                <div v-for="user in users" :key="user.id">
-                <p>{{ user.id }} {{ user.name }}</p>
-        </div>  
-        </v-sheet>   
-        </div>
-                    
+        <div class="d-flex flex-column">
+            <div class=" ">
+                <h1>Home</h1>                    
+            </div>
+            <v-divider ></v-divider>
+            <div v-for="post in posts" :key="post.id">
+                <h2>{{ post.id }} {{ post.title }}</h2>
+                <p>{{ post.body }}</p>
+            </div>
+        </div>                    
         </v-main>
 
 </template>
@@ -60,3 +53,9 @@ export default {
     
 }
 </script>
+
+<style scoped>
+.bg-color-nav-drawer{
+    background-color: #11212D;
+}
+</style>

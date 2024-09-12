@@ -1,9 +1,5 @@
 <script setup>
-
-
   import { RouterView } from "vue-router";
-
-
 </script>
 
 <template>
@@ -19,10 +15,25 @@
       ></v-img>
     </div>
 
-    </v-app-bar>
+    <!-- mostrar opcion dependiedo de la ruta  -->
+    <template v-if="isHome" >
+      <v-spacer></v-spacer>
+      <div class="d-flex mr-5">
+        
+        <v-list-item link
+          prepend-avatar="https://randomuser.me/api/portraits/women/81.jpg"            
+          title="Jane Smith"
+          subtitle="View Profile"
+                  
+          ></v-list-item>
+           
+      </div>        
+    </template>
+
+  </v-app-bar>
 
     <!-- contenido -->
-    <v-main class= "bg-color-main">
+    <v-main>
       <RouterView />
     </v-main>
 
@@ -42,8 +53,15 @@
 export default {
   name: 'App',
   data() {
-    
-    } 
+    return{
+      username: "John Doe",
+    };
+  },
+  computed: {
+    isHome() {
+      return this.$route.name === 'home';
+    },
+  },
 }
 </script>
 
@@ -51,9 +69,7 @@ export default {
 .bg-color{
     background-color: #06141B;
 }
-.bg-color-main{
-  background-color: #EEEAEA;
-}
+
 .urbanist-font {
   font-family: "Urbanist", sans-serif;
   font-optical-sizing: auto;

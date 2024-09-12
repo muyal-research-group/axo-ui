@@ -5,7 +5,7 @@
 </script>
 
 <template>
-    <v-main class="d-flex align-center justify-center"
+    <v-main class="d-flex align-center justify-center bg-color-main h-100"
     style="min-height: 300px;"
     >
         <v-sheet 
@@ -81,6 +81,9 @@
 <style scoped>
 .btn-color{
     background-color: #06141B;
+}
+.bg-color-main{
+  background-color: #EEEAEA;
 }
 
 
