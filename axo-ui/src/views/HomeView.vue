@@ -6,7 +6,7 @@
         class="bg-color-nav-drawer"
         >
         <v-divider></v-divider>
-            
+        <!--menu lateral-->   
         <v-list density="compact" nav class=" text-white">
             <v-list-item prepend-icon="mdi-home" title="Home" value="home"></v-list-item>
             <v-list-item prepend-icon="mdi-folder" title="My Objects" value="myOjects"></v-list-item>
@@ -27,6 +27,7 @@
                 <h1>Home</h1>                    
             </div>
             <v-divider ></v-divider>
+        <!--en esta funcion se rellena el cuerpo del home con los datos del usuario-->
             <div v-for="post in posts" :key="post.id">
                 <h2>{{ post.id }} {{ post.title }}</h2>
                 <p>{{ post.body }}</p>
@@ -37,7 +38,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+//import axios from 'axios';
 import userData from '../users.json'
 
 export default {
@@ -47,10 +48,9 @@ export default {
             posts: []
         }
     },
-    mounted(){
+    /*mounted(){
         axios.get('https://jsonplaceholder.typicode.com/posts').then(response => this.posts = response.data)
-    }
-    
+    }*/   
 }
 </script>
 

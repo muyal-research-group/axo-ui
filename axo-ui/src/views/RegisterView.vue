@@ -6,13 +6,11 @@
     const email = ref('')
     const password = ref('')
     const passwordConfirmation = ref('')
-
 </script>
 
 <template>
     <v-main class="d-flex align-center justify-center bg-color-main h-100"
-    style="min-height: 300px;"
-    >
+    style="min-height: 300px;">
         <v-sheet 
         width="450" 
         class="d-flex flex-column align-center justify-center pa-5 rounded-lg" style="position: relative;">
@@ -28,6 +26,7 @@
                 size="x-large"
                 />
             </v-sheet>
+            <!--formulario del registro de usuarios-->
             <v-form fast-fail @submit.prevent class="w-100 mt-8 pa-3">
                 <v-text-field clearable
                     label="First Name" 
@@ -82,16 +81,7 @@
                     :type="visible ? 'text' : 'password'"                    
                     @click:append-inner="visible = !visible"
                 >
-                </v-text-field>
-                <div class="d-flex justify-space-between">
-                    <div>
-                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                        <label for="rememberMe" class="text-disabled ">   Remember me</label>
-                    </div>
-                    <router-link to="" class="text-decoration-none text-blue-accent-1 ">
-                        Forgot password?
-                    </router-link>
-                </div>               
+                </v-text-field>              
                 <div class="d-flex flex-column mt-4 w-100 justify-center align-center">
                     <v-btn class="btn-color w-100 text-white mb-5" type="submit" >Sign Up</v-btn>
                     <div>
@@ -108,7 +98,6 @@
     </v-main>
 </template>
 
-
 <script>
   export default {
     data: () => ({
@@ -124,7 +113,5 @@
 .bg-color-main{
   background-color: #EEEAEA;
 }
-
-
 </style>
 
