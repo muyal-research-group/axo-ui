@@ -23,14 +23,14 @@
                 size="x-large"
                 />
             </v-sheet>
+        <!--formulario -->
             <v-form fast-fail @submit.prevent class="w-100 mt-8 pa-8">
                 <v-text-field clearable
                     label="Username" 
                     v-model="username"
                     variant="filled"
                     class="font-weight-bold"
-                    density="compact"
-                            
+                    density="compact"           
                 >
                 </v-text-field>
                 <v-text-field
@@ -69,7 +69,6 @@
     </v-main>
 </template>
 
-
 <script>
   export default {
     data: () => ({
@@ -85,7 +84,5 @@
 .bg-color-main{
   background-color: #EEEAEA;
 }
-
-
 </style>
 
