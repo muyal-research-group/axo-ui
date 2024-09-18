@@ -13,7 +13,6 @@
         class=" ml-5"
       ></v-img>
     </div>
-    <!-- informacion de usuario, se encuentra estatica por el momento lo ideal seria que se cambie en funcion del login -->
     <template v-if="isHome" >
       <v-spacer></v-spacer>
       <div class="d-flex mr-5">
