@@ -1,13 +1,3 @@
-<script setup>
-    import { ref } from 'vue';
-    const firstName = ref('')
-    const lastName = ref('')
-    const username = ref('')
-    const email = ref('')
-    const password = ref('')
-    const passwordConfirmation = ref('')
-</script>
-
 <template>
     <v-main class="d-flex align-center justify-center bg-color-main h-100"
     style="min-height: 300px;">
@@ -98,12 +88,16 @@
     </v-main>
 </template>
 
-<script>
-  export default {
-    data: () => ({
-      visible: false,
-    }),
-  }
+<script setup>
+    import { ref } from 'vue';
+    
+    const visible = ref(false)
+    const firstName = ref('')
+    const lastName = ref('')
+    const username = ref('')
+    const email = ref('')
+    const password = ref('')
+    const passwordConfirmation = ref('')
 </script>
 
 <style scoped>

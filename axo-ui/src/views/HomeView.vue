@@ -1,4 +1,3 @@
-
 <template>
     <v-navigation-drawer app
         expand-on-hover
@@ -12,7 +11,6 @@
             <v-list-item prepend-icon="mdi-folder" title="My Objects" value="myOjects"></v-list-item>
             <v-list-item prepend-icon="mdi-cube" title="My Virtual Enviroment" value="myEnviroment"></v-list-item>
             <v-list-item prepend-icon="mdi-grid" title="My Endpoints" value="myEndpoints"></v-list-item>
-     
             <v-spacer></v-spacer>
             <v-spacer></v-spacer> 
             <v-list-item prepend-icon="mdi-logout" title="Log Out" value="logout"></v-list-item>
@@ -28,30 +26,20 @@
             </div>
             <v-divider ></v-divider>
         <!--en esta funcion se rellena el cuerpo del home con los datos del usuario-->
-            <div v-for="post in posts" :key="post.id">
-                <h2>{{ post.id }} {{ post.title }}</h2>
-                <p>{{ post.body }}</p>
+            <div v-for="user in users" :key="user.id">
+                <h2>{{ user.id }}</h2>
+                <p>{{ user.name }}</p>
             </div>
         </div>                    
         </v-main>
-
 </template>
 
-<script>
-//import axios from 'axios';
+<script setup>
+import { ref } from 'vue';
 import userData from '../users.json'
 
-export default {
-    data(){
-        return {
-            users: userData,
-            posts: []
-        }
-    },
-    /*mounted(){
-        axios.get('https://jsonplaceholder.typicode.com/posts').then(response => this.posts = response.data)
-    }*/   
-}
+const users = ref(userData);
+
 </script>
 
 <style scoped>

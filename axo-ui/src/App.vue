@@ -1,7 +1,3 @@
-<script setup>
-  import { RouterView } from "vue-router";
-</script>
-
 <template>
   <v-app>
     <v-layout class="rounded rounded-md urbanist-font">
@@ -18,7 +14,7 @@
       <div class="d-flex mr-5">
         <v-list-item link
           prepend-avatar= "https://randomuser.me/api/portraits/lego/1.jpg"           
-          title="User name"
+          :title="username"
           subtitle="View Profile"
           ></v-list-item>   
       </div>        
@@ -36,28 +32,19 @@
   </v-app>
 </template>
 
+<script setup>
+  import { useRoute } from "vue-router";
+  import { ref, computed } from "vue";
 
-<script>
-export default {
-  name: 'App',
-  data() {
-    return{
-      username: "John Doe",
-    };
-  },
-  computed: {
-    isHome() {
-      return this.$route.name === 'home';
-    },
-  },
-}
+  const route = useRoute();
+  const isHome = computed(()=> route.name ==='home');
+  var username = ref("Pedro");
 </script>
 
 <style scoped>
 .bg-color{
     background-color: #06141B;
 }
-
 .urbanist-font {
   font-family: "Urbanist", sans-serif;
   font-optical-sizing: auto;
