@@ -3,26 +3,16 @@
         <div class="img"></div>
         <div class="textBox">
             <div class="textContent">
-                <div class="w-75">
-                    <p class="h1">{{ props.title  }}</p>
-                    <div class="w-70">
-                    <p class="p">{{ props.description }}</p>
-                </div>
-            </div>
-            <div class="d-flex">
+              <div>
+                <p class="h1">{{ props.title  }}</p>
+                <p class="p">{{ props.description }}</p> 
+              </div>                          
+            <div class="d-flex align-center justify-space-between ml-5">
                 <span class="span">
                     <v-icon small>mdi-account</v-icon>
                     {{ props.autor }}
-                </span>
-                <v-btn
-                    class="text-none
-                    pa-1 ml-5 "
-                    color="#1B3345"
-                    size="extra-small"
-                    variant="flat"
-                >
-                Add
-                </v-btn>
+                </span>           
+                <slot name="button"></slot>
             </div>         
         </div>
     </div>
@@ -52,7 +42,7 @@ const props = defineProps({
 
 .card {
   width: 100%;
-  max-width: 700px;
+  max-width: 800px;
   height: 90px;
   background: #d9d8d8;
   border-radius: 10px;
@@ -86,7 +76,6 @@ const props = defineProps({
   width: calc(100% - 90px);
   margin-left: 10px;
   color: rgb(0, 0, 0);
-  font-family: 'Poppins' sans-serif;
 }
 
 .textContent {
@@ -98,6 +87,7 @@ const props = defineProps({
 .span {
   font-size: 10px;
   color: #4a4a4a;
+  margin-right: 5px ;
 }
 
 .h1 {

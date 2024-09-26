@@ -7,7 +7,6 @@
             class=" ml-5"
           ></v-img>
         </div>
-        <template v-if="isHome" >
           <v-spacer></v-spacer>
           <div class="d-flex mr-5">
             <v-list-item link
@@ -16,18 +15,14 @@
               subtitle="View Profile"
               ></v-list-item>   
           </div>        
-        </template>
-
       </v-app-bar>
 </template>
 
 <script setup>
-  import { useRoute } from "vue-router";
-  import { ref, computed } from "vue";
 
-  const route = useRoute();
-  const isHome = computed(()=> route.name ==='home');
-  var username = ref("Pedro");
+  import { ref, } from "vue";
+  var username = ref("User");
+  
 </script>
 
 <style scoped>

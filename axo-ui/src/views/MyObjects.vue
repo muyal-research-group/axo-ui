@@ -10,7 +10,7 @@
         >
             <div class="d-flex flex-column">
                 <div class="d-flex">
-                    <h1>Home</h1>
+                    <h1>My Objects</h1>
                     <v-spacer></v-spacer>
                     <!-- barra busqueda -->
                     <SearchBar @update:search="handleSearch"  />             
@@ -26,12 +26,8 @@
                     :autor="object.autor"
                     >
                     <template #button>
-                        <button 
-                        @click="handleAdd(object)"
-                        :class="  object.added ? 'btn-added' : 'btn-add' "
-                        :disabled="object.added"
-                        >
-                        {{ object.added ? 'Added' : 'Add' }}    
+                        <button class="btn-add">
+                            Editar
                         </button>
                     </template>
                     </CardVariant>
@@ -70,10 +66,7 @@ const objects = ref([
     },
 ]);
 
-//funcion boton para agregar
-const handleAdd = (object) => {
-    object.added = !object.added
-}
+
 
 </script>
 

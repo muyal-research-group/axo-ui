@@ -27,7 +27,6 @@
 }
 
 .input {
-  font-family: "Montserrat", sans-serif;
   width: 100%;
   height: 35px;
   padding-left: 2.5rem;
