@@ -1,6 +1,5 @@
 <template>
-    <v-main class="d-flex align-center justify-center bg-color-main h-100"
-    style="min-height: 300px;">
+    <v-main class="d-flex align-center justify-center bg-color-main h-100" style="min-height: 300px; padding-top: 100px;">
         <v-sheet 
         width="450" 
         class="d-flex flex-column align-center justify-center pa-5 rounded-lg" style="position: relative;">
