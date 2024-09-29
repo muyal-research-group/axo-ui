@@ -1,5 +1,7 @@
+import CreateObject from '@/views/CreateObject.vue'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
+import MyObjects from '@/views/MyObjects.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -18,7 +20,18 @@ const routes = [
     path: "/home",
     name: "home",
     component: HomeView
-  }
+  },
+  {
+    path: "/my-objects",
+    name: "my-objects",
+    component: MyObjects
+  },
+  {
+    path: "/create-object",
+    name: "create-object",
+    component: CreateObject
+  },
+  
 ]
 
 const router = createRouter({
