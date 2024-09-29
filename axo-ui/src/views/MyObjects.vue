@@ -9,9 +9,17 @@
         style="min-height: 300px;"
         >
             <div class="d-flex flex-column">
-                <div class="d-flex">
+                <div class="d-flex align-center">
                     <h1>My Objects</h1>
                     <v-spacer></v-spacer>
+                    <!-- boton crear objeto -->
+                    <router-link to="/create-object">
+                        <button 
+                        class="btn-create-object"
+                        >
+                        Create New
+                        </button>
+                    </router-link>                   
                     <!-- barra busqueda -->
                     <SearchBar @update:search="handleSearch"  />             
                 </div>
@@ -25,14 +33,14 @@
                     :description="object.description"
                     :autor="object.autor"
                     >
+                    <!-- boton editar -->
                     <template #button>
                         <button class="btn-add">
                             Editar
                         </button>
                     </template>
                     </CardVariant>
-                </div>
-            
+                </div>          
             </div>                    
         </v-main>
 </template>
@@ -66,8 +74,6 @@ const objects = ref([
     },
 ]);
 
-
-
 </script>
 
 <style scoped>
@@ -84,20 +90,18 @@ const objects = ref([
 .btn-add:hover {
   background-color: #000000;
 }
-
-.btn-added {
-  background-color: #A9A9A9;
+.btn-create-object {
+  background-color: #11212D;
   color: white;
   padding: 5px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 15px;
+  margin-right: 15px;
 }
 
-.btn-added:hover {
-  background-color: #808080;
+.btn-create-object:hover {
+  background-color: #000000;
 }
-
 </style>
 

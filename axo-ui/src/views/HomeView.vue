@@ -25,6 +25,7 @@
                     :description="object.description"
                     :autor="object.autor"
                     >
+                    <!-- boton agregar -->
                     <template #button>
                         <button 
                         @click="handleAdd(object)"
@@ -35,8 +36,7 @@
                         </button>
                     </template>
                     </CardVariant>
-                </div>
-            
+                </div>           
             </div>                    
         </v-main>
 </template>
@@ -93,17 +93,13 @@ const handleAdd = (object) => {
 }
 
 .btn-added {
-  background-color: #A9A9A9;
+  background-color: #57778F;
   color: white;
   padding: 5px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-left: 15px;
-}
-
-.btn-added:hover {
-  background-color: #808080;
 }
 
 </style>

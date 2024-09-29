@@ -1,3 +1,4 @@
+import CreateObject from '@/views/CreateObject.vue'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import MyObjects from '@/views/MyObjects.vue'
@@ -24,7 +25,12 @@ const routes = [
     path: "/my-objects",
     name: "my-objects",
     component: MyObjects
-  }
+  },
+  {
+    path: "/create-object",
+    name: "create-object",
+    component: CreateObject
+  },
   
 ]
 
