@@ -1,4 +1,5 @@
 import CreateObject from '@/views/CreateObject.vue'
+import EditObject from '@/views/EditObject.vue'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import MyObjects from '@/views/MyObjects.vue'
@@ -30,6 +31,11 @@ const routes = [
     path: "/create-object",
     name: "create-object",
     component: CreateObject
+  },
+  {
+    path: "/edit-object",
+    name: "edit-object",
+    component: EditObject
   },
   
 ]
