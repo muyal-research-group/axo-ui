@@ -16,10 +16,10 @@
                 />
             </v-sheet>
             <!--formulario del registro de usuarios-->
-            <v-form fast-fail @submit.prevent class="w-100 mt-8 pa-3">
+            <v-form fast-fail @submit.prevent="SignUp" class="w-100 mt-8 pa-3">
                 <v-text-field clearable
                     label="First Name" 
-                    v-model="firstName"
+                    v-model="first_name"
                     variant="filled"
                     class="font-weight-bold"
                     density="compact"            
@@ -27,7 +27,7 @@
                 </v-text-field>
                 <v-text-field clearable
                     label="Last Name" 
-                    v-model="lastName"
+                    v-model="last_name"
                     variant="filled"
                     class="font-weight-bold"
                     density="compact"            
@@ -62,15 +62,17 @@
                 </v-text-field>
                 <v-text-field
                     label="Confirm password"
-                    v-model="passwordConfirmation"
+                    v-model="confirm_password"
                     variant="filled"           
                     class="font-weight-bold" 
                     density="compact"
-                    :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
-                    :type="visible ? 'text' : 'password'"                    
-                    @click:append-inner="visible = !visible"
+                    :append-inner-icon="visibleConfirmPass ? 'mdi-eye-off' : 'mdi-eye'"
+                    :type="visibleConfirmPass ? 'text' : 'password'"                    
+                    @click:append-inner="visibleConfirmPass = !visibleConfirmPass"
                 >
-                </v-text-field>              
+                </v-text-field>
+                <p v-if="passwordError" style="color: red;">{{ passwordError }}</p> 
+                <p v-if="errorMessage">{{ errorMessage }}</p>             
                 <div class="d-flex flex-column mt-4 w-100 justify-center align-center">
                     <v-btn class="btn-color w-100 text-white mb-5" type="submit" >Sign Up</v-btn>
                     <div>
@@ -89,14 +91,42 @@
 
 <script setup>
     import { ref } from 'vue';
-    
+    import { useUserStore } from '@/store/user';
+    import { useRouter } from 'vue-router';
+
+    const router = useRouter();
+    const userStore = useUserStore();
     const visible = ref(false)
-    const firstName = ref('')
-    const lastName = ref('')
+    const visibleConfirmPass = ref(false)
+    const first_name = ref('')
+    const last_name = ref('')
     const username = ref('')
     const email = ref('')
     const password = ref('')
-    const passwordConfirmation = ref('')
+    const confirm_password = ref('')
+    const passwordError = ref('');
+    const errorMessage = ref('')
+
+    const SignUp = async () => {
+        try{
+            const SignUpSucces = await userStore.register(first_name.value,last_name.value, username.value, email.value, password.value);
+
+            if(password.value !== confirm_password.value ){
+                passwordError.value = 'Las contraseñas no coinciden'
+                return;
+            }
+            if(SignUpSucces) {
+                console.log('Sign Up succes');
+                await router.push('/');
+            } else {
+                errorMessage.value = 'Ocurrio un error al registrarse'
+            }
+        } catch(error) {
+            console.error('Error al registrarse:', error);
+            errorMessage.value = 'Hubo un problema con el registro.';
+        }
+    }
+
 </script>
 
 <style scoped>

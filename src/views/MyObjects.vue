@@ -35,9 +35,11 @@
                     >
                     <!-- boton editar -->
                     <template #button>
-                        <button class="btn-add">
-                            Editar
-                        </button>
+                        <router-link to="/edit-object">
+                            <button class="btn-add">
+                                Editar
+                            </button>
+                        </router-link>                       
                     </template>
                     </CardVariant>
                 </div>          
