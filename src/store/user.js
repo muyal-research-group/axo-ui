@@ -7,47 +7,62 @@ export const useUserStore = defineStore('users',() => {
     //funcion login
     async function login (username, password){
         try{
+            const body = {
+                username: username,
+                password: password,
+                status:0
+            }
+            console.log("BODY", body)
             const response = await fetch ('http://localhost:17000/auth', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    username: username,
-                    password: password
-                }),
+                body: JSON.stringify(body),
             })
             if (response.ok) {
                 user.value = await response.json();
-                return true; 
+                
+                return {color:"success",isOnError:false, message:"Login successfully completed."}; 
             } else {
-                return false; 
+                const message = (await response.json())?.detail ?? "Uknown error."
+                // await (response.json().then(x=>x["detail"]) )
+                return {color:"error",isOnError:true, message  }  ; 
             }
         } catch (error){
-            console.error('Error de red:', error);
-            return false;
+            console.error('Error', error);
+            const message = error?.message ?? "Uknown error, please contact us on support@axo.mx"
+
+            return {color:"error",isOnError:true, message:message}; 
         }
     }
 
     //funcion register
     async function register(first_name, last_name, username, email, password ) {
         try {
+            const body  = {
+                    user: {
+                        profile:"",
+                        first_name: first_name,
+                        last_name: last_name,
+                        username: username,
+                        email: email,
+                        disabled: false
+                    },
+                    credentials: {
+                        password: password,
+                        pin:"",
+                        token:""
+                    }
+
+            }
+            console.log("BODY",body)
             const response = await fetch('http://localhost:17000/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    user: {
-                        first_name: first_name,
-                        last_name: last_name,
-                        username: username,
-                        email: email,
-                    },
-                    credentials: {
-                        password: password
-                    }
-                }),
+                body: JSON.stringify(body),
             });
             if (response.ok) {
                 console.log('Registro exitoso');
