@@ -95,7 +95,6 @@ const visible = ref(false);
 const username = ref("");
 const password = ref("");
 const isLoading = ref(false);
-// const errorMessage = ref("");
 const snackbar = reactive({ color: "success", message: "", show: false });
 
 const SignIn = async () => {
@@ -107,22 +106,18 @@ const SignIn = async () => {
     snackbar.show = true;
     isLoading.value = true;
     if (!loginResult.isOnError) {
-      //   console.log("Login succes");
       setTimeout(async () => {
         await router.push("/home");
       }, 1500);
-    } else {
-      //   errorMessage.value = "Error desconocido o credenciales invalidas";
     }
   } catch (error) {
     console.error("Error en login:", error);
-    // errorMessage.value = "Hubo un problema con el login.";
   } finally {
     setTimeout(() => {
       isLoading.value = false;
     }, 500);
-  }
-};
+  }  
+} 
 </script>
 
 <style scoped>
