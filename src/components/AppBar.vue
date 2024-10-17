@@ -8,21 +8,16 @@
           ></v-img>
         </div>
           <v-spacer></v-spacer>
-          <div class="d-flex mr-5">
-            <v-list-item link
-              prepend-avatar= "https://randomuser.me/api/portraits/lego/1.jpg"           
-              :title="username"
-              subtitle="View Profile"
-              ></v-list-item>   
+          <!-- Popover Menu -->
+          <div class="d-flex">
+            <popoverMenu />
           </div>        
       </v-app-bar>
 </template>
 
 <script setup>
+import PopoverMenu from "./PopoverMenu.vue";
 
-  import { ref, } from "vue";
-  var username = ref("User");
-  
 </script>
 
 <style scoped>
