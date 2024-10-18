@@ -20,6 +20,8 @@
                 <v-text-field clearable
                     label="First Name" 
                     v-model="first_name"
+                    :rules="rules.firstNameRules"
+                    required
                     variant="filled"
                     class="font-weight-bold"
                     density="compact"            
@@ -28,6 +30,8 @@
                 <v-text-field clearable
                     label="Last Name" 
                     v-model="last_name"
+                    :rules="rules.lastNameRules"
+                    required
                     variant="filled"
                     class="font-weight-bold"
                     density="compact"            
@@ -36,6 +40,8 @@
                 <v-text-field clearable
                     label="Username" 
                     v-model="username"
+                    :rules="rules.usernameRules"
+                    required
                     variant="filled"
                     class="font-weight-bold"
                     density="compact"             
@@ -44,6 +50,8 @@
                 <v-text-field clearable
                     label="Email" 
                     v-model="email"
+                    :rules="rules.emailRules"
+                    required
                     variant="filled"
                     class="font-weight-bold"
                     density="compact"             
@@ -52,6 +60,8 @@
                 <v-text-field
                     label="Password"
                     v-model="password"
+                    :rules="rules.passwordRules"
+                    required
                     variant="filled"           
                     class="font-weight-bold" 
                     density="compact"
@@ -63,6 +73,8 @@
                 <v-text-field
                     label="Confirm password"
                     v-model="confirm_password"
+                    :rules="rules.confirmPassRules"
+                    required
                     variant="filled"           
                     class="font-weight-bold" 
                     density="compact"
@@ -70,11 +82,13 @@
                     :type="visibleConfirmPass ? 'text' : 'password'"                    
                     @click:append-inner="visibleConfirmPass = !visibleConfirmPass"
                 >
-                </v-text-field>
-                <p v-if="passwordError" style="color: red;">{{ passwordError }}</p> 
-                <p v-if="errorMessage">{{ errorMessage }}</p>             
+                </v-text-field>           
                 <div class="d-flex flex-column mt-4 w-100 justify-center align-center">
-                    <v-btn class="btn-color w-100 text-white mb-5" type="submit" >Sign Up</v-btn>
+                    <v-btn
+                    :loading="isLoading"
+                    :disabled="isLoading"
+                    class="btn-color w-100 text-white mb-5" 
+                    type="submit" >Sign Up</v-btn>
                     <div>
                         <v-text class="text-disabled">Already on Axo?</v-text>
                         <router-link to="/" class="text-decoration-none font-weight-bold"
@@ -86,11 +100,19 @@
                 </div>
             </v-form>           
         </v-sheet>
+        <v-snackbar v-model="snackbar.show" :color="snackbar.color">
+            {{ snackbar.message }}
+            <template v-slot:actions>
+                <v-btn color="white" variant="text" @click="snackbar.show = false">
+                    Close
+                </v-btn>
+            </template>
+        </v-snackbar>
     </v-main>
 </template>
 
 <script setup>
-    import { ref } from 'vue';
+    import { reactive,ref } from 'vue';
     import { useUserStore } from '@/store/user';
     import { useRouter } from 'vue-router';
 
@@ -104,27 +126,51 @@
     const email = ref('')
     const password = ref('')
     const confirm_password = ref('')
-    const passwordError = ref('');
-    const errorMessage = ref('')
+    const isLoading = ref(false);
+    const snackbar = reactive({ color: "success", message: "", show: false });
 
+    const rules = {
+        firstNameRules: [
+            value => !!value || 'You must enter a first name'
+        ],
+        lastNameRules: [
+            value => !!value || 'You must enter a last name'
+        ],
+        usernameRules: [
+            value => !!value || 'You must enter an username'
+        ],
+        emailRules: [
+            value => !!value || 'You must enter an email'
+        ],
+        passwordRules: [
+            value => !!value || 'You must enter a password'
+        ],
+        confirmPassRules: [
+            value => !!value || 'This field is required',
+            value => value === password.value || 'Passwords do not match'
+        ],
+
+    }
     const SignUp = async () => {
         try{
-            const SignUpSucces = await userStore.register(first_name.value,last_name.value, username.value, email.value, password.value);
-
-            if(password.value !== confirm_password.value ){
-                passwordError.value = 'Las contraseñas no coinciden'
-                return;
-            }
-            if(SignUpSucces) {
-                console.log('Sign Up succes');
-                await router.push('/');
-            } else {
-                errorMessage.value = 'Ocurrio un error al registrarse'
-            }
-        } catch(error) {
-            console.error('Error al registrarse:', error);
-            errorMessage.value = 'Hubo un problema con el registro.';
-        }
+            isLoading.value = true;
+                const SignUpResult = await userStore.register(first_name.value,last_name.value, username.value, email.value, password.value);
+                console.log("SIGNUP_RESULT", SignUpResult);
+                snackbar.color = SignUpResult.color;
+                snackbar.message = SignUpResult.message;
+                snackbar.show = true;
+                
+                if (!SignUpResult.isOnError) {
+                    setTimeout(async () => {await router.push("/");
+                    }, 1500);
+                }
+            } catch(error) {
+                console.error('Error al registrarse:', error);
+            } finally {
+                setTimeout(() => {
+                    isLoading.value = false;
+                }, 500);
+            }           
     }
 
 </script>

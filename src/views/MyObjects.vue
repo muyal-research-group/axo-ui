@@ -1,8 +1,6 @@
 <template>
     <!-- barra navegacion -->
     <AppBar />
-    <!-- sidebar -->
-    <NavDrawer />
     <!-- main -->
         <v-main 
         class="d-flex-column justify-center align-center pa-5"
@@ -49,7 +47,6 @@
 
 <script setup>
 import AppBar from '@/components/AppBar.vue';
-import NavDrawer from '@/components/NavDrawer.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import CardVariant from '@/components/CardVariant.vue';
 import { ref } from 'vue';
