@@ -16,7 +16,8 @@
         color="#06141B"
         style="border-radius: 50%; position: absolute; top: -50px; z-index: 10"
       >
-        <v-icon icon="mdi-account" size="x-large" />
+        <!-- <v-icon icon="mdi-account" size="x-large" /> -->
+        <v-img src="@/assets/logo.png"></v-img>
       </v-sheet>
       <!--formulario -->
       <v-form fast-fail @submit.prevent="SignIn" class="w-100 mt-8 pa-8">
@@ -116,8 +117,8 @@ const SignIn = async () => {
     setTimeout(() => {
       isLoading.value = false;
     }, 500);
-  }  
-} 
+  }
+};
 </script>
 
 <style scoped>
