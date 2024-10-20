@@ -10,10 +10,7 @@
                 color="#06141B"
                 style="border-radius: 50%; position: absolute; top: -50px; z-index: 10;"
             >
-            <v-icon 
-                icon="mdi-account"
-                size="x-large"
-                />
+            <v-img src="@/assets/logo.png"></v-img>
             </v-sheet>
             <!--formulario del registro de usuarios-->
             <v-form fast-fail @submit.prevent="SignUp" class="w-100 mt-8 pa-3">

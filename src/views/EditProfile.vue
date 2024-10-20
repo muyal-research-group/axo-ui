@@ -35,18 +35,28 @@
                 <v-row>
                   <v-col cols="12" sm="6">
                     <p>First Name</p>
-                    <v-text-field placeholder="First Name" variant="outlined" density="compact"></v-text-field>
+                    <v-text-field 
+                    placeholder="First Name" 
+                    variant="outlined" 
+                    density="compact"
+                    :model-value= "userStore.user.first_name" 
+                    ></v-text-field>
                   </v-col>
 
                   <v-col cols="12" sm="6">
                     <p>Last Name</p>
-                    <v-text-field placeholder="Last Name" variant="outlined" density="compact"></v-text-field>
+                    <v-text-field 
+                    placeholder="Last Name" 
+                    variant="outlined" 
+                    density="compact"
+                    :model-value= "userStore.user.last_name"
+                    ></v-text-field>
                   </v-col>
 
                   <v-col cols="12" sm="12">
                     <p>About</p>
                     <v-textarea
-                      label="Three rows"
+                      placeholder="About"
                       row-height="25"
                       rows="3"
                       variant="outlined"
@@ -57,7 +67,12 @@
 
                   <v-col cols="12" sm="6">
                     <p>Username</p>
-                    <v-text-field placeholder="Username" variant="outlined" density="compact"></v-text-field>
+                    <v-text-field 
+                    placeholder="Username" 
+                    variant="outlined" 
+                    density="compact"
+                    :model-value= "userStore.user.username"
+                    ></v-text-field>
                   </v-col>
                 </v-row>
                 <div class="d-flex align-end justify-end w-100 mt-5">
@@ -74,7 +89,9 @@
 </template>
 
 <script setup>
+import { useUserStore } from "@/store/user";
 
+const userStore = useUserStore(); 
 </script>
 
 <style scoped>
