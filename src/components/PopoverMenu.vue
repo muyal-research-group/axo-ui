@@ -60,7 +60,7 @@ const menu = ref(false);
 
 const items= [
         { text: 'Notifications', icon: 'mdi-bell', route: '#' },
-        { text: 'Settings', icon: 'mdi-cogs', route: '#' },
+        { text: 'Settings', icon: 'mdi-cogs', route: '/edit-profile' },
         { text: 'Logout', icon: 'mdi-logout', route: '/' },
     ]
 
