@@ -1,12 +1,11 @@
 <template>
-    <!-- barra navegacion -->
-    <AppBar />
     <!-- main -->
         <v-main 
         class="d-flex-column justify-center align-center pa-5"
         style="min-height: 300px;"
         >
-            <div class="d-flex flex-column">
+            <v-container>
+                <div class="d-flex flex-column">
                 <div class="d-flex">
                     <h1>Home</h1>
                     <v-spacer></v-spacer>
@@ -35,12 +34,12 @@
                     </template>
                     </CardVariant>
                 </div>           
-            </div>                    
+            </div>        
+            </v-container>           
         </v-main>
 </template>
 
 <script setup>
-import AppBar from '@/components/AppBar.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import CardVariant from '@/components/CardVariant.vue';
 import { ref } from 'vue';

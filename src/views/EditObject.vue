@@ -1,11 +1,10 @@
 <template>
-    <!-- barra navegacion -->
-    <AppBar />
     <!-- main -->
         <v-main 
         class="d-flex-column justify-center align-center pa-5"
         style="min-height: 300px;"
         >
+          <v-container>
             <div class="d-flex flex-column">
                 <div class="d-flex align-center">
                     <h1>Edit Object</h1>                   
@@ -45,12 +44,13 @@
                         </div>
                     </div>
                 </div>           
-            </div>                    
+            </div>     
+          </v-container>               
         </v-main>
 </template>
 
 <script setup>
-import AppBar from '@/components/AppBar.vue';
+
 import { ref } from 'vue';
 
 const value = ref('0')

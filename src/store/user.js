@@ -70,7 +70,7 @@ export const useUserStore = defineStore('users',() => {
                     }
             }
             console.log("BODY",body)
-            const response = await fetch('http://localhost:17000/signup', {
+            const response = await fetch('http://localhost:17000/auth/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
