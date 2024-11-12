@@ -16,7 +16,7 @@
         color="#06141B"
         style="border-radius: 50%; position: absolute; top: -50px; z-index: 10"
       >
-        <v-icon icon="mdi-account" size="x-large" />
+        <v-img src="@/assets/logo.png"></v-img>
       </v-sheet>
       <!--formulario -->
       <v-form fast-fail @submit.prevent="SignIn" class="w-100 mt-8 pa-8">
@@ -95,7 +95,6 @@ const visible = ref(false);
 const username = ref("");
 const password = ref("");
 const isLoading = ref(false);
-// const errorMessage = ref("");
 const snackbar = reactive({ color: "success", message: "", show: false });
 
 const SignIn = async () => {
@@ -107,16 +106,12 @@ const SignIn = async () => {
     snackbar.show = true;
     isLoading.value = true;
     if (!loginResult.isOnError) {
-      //   console.log("Login succes");
       setTimeout(async () => {
         await router.push("/home");
       }, 1500);
-    } else {
-      //   errorMessage.value = "Error desconocido o credenciales invalidas";
     }
   } catch (error) {
     console.error("Error en login:", error);
-    // errorMessage.value = "Hubo un problema con el login.";
   } finally {
     setTimeout(() => {
       isLoading.value = false;

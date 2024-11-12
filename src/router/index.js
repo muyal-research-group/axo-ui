@@ -1,5 +1,6 @@
 import CreateObject from '@/views/CreateObject.vue'
 import EditObject from '@/views/EditObject.vue'
+import EditProfile from '@/views/EditProfile.vue'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
 import MyObjects from '@/views/MyObjects.vue'
@@ -36,6 +37,11 @@ const routes = [
     path: "/edit-object",
     name: "edit-object",
     component: EditObject
+  },
+  {
+    path: "/edit-profile",
+    name: "edit-profile",
+    component: EditProfile
   },
   
 ]

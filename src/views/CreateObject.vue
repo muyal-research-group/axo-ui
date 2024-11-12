@@ -1,13 +1,10 @@
 <template>
-    <!-- barra navegacion -->
-    <AppBar />
-    <!-- sidebar -->
-    <NavDrawer />
     <!-- main -->
         <v-main 
         class="d-flex-column justify-center align-center pa-5"
         style="min-height: 300px;"
         >
+          <v-container>
             <div class="d-flex flex-column">
                 <div class="d-flex align-center">
                     <h1>Create Object</h1>
@@ -40,13 +37,12 @@
                     </v-col>
                   </v-row>
                 </div>           
-            </div>                    
+            </div>  
+          </v-container>                  
         </v-main>
 </template>
 
 <script setup>
-import AppBar from '@/components/AppBar.vue';
-import NavDrawer from '@/components/NavDrawer.vue';
 import FormCreateObject from '@/components/FormCreateObject.vue';
 import CodeArea from '@/components/CodeArea.vue';
 </script>

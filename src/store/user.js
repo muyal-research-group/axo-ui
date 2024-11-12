@@ -7,6 +7,13 @@ export const useUserStore = defineStore('users',() => {
     //funcion login
     async function login (username, password){
         try{
+            if (!username || !password) {
+                return {
+                    color: "error",
+                    isOnError: true,
+                    message: "All fields are required.",
+                };
+            }  
             const body = {
                 username: username,
                 password: password,
@@ -40,6 +47,13 @@ export const useUserStore = defineStore('users',() => {
     //funcion register
     async function register(first_name, last_name, username, email, password ) {
         try {
+            if (!first_name || !last_name || !username || !email || !password) {
+                return {
+                    color: "error",
+                    isOnError: true,
+                    message: "All fields are required.",
+                };
+            }               
             const body  = {
                     user: {
                         profile:"",
@@ -54,10 +68,9 @@ export const useUserStore = defineStore('users',() => {
                         pin:"",
                         token:""
                     }
-
             }
             console.log("BODY",body)
-            const response = await fetch('http://localhost:17000/signup', {
+            const response = await fetch('http://localhost:17000/auth/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -65,13 +78,16 @@ export const useUserStore = defineStore('users',() => {
                 body: JSON.stringify(body),
             });
             if (response.ok) {
-                console.log('Registro exitoso');
-                return true; 
+                return {color:"success",isOnError:false, message:"Register successfully completed. Please Login."}; 
             } else {
-                return false; 
-            } 
+                const message = (await response.json())?.detail ?? "Uknown error."
+                return {color:"error",isOnError:true, message  }  ; 
+            }
         } catch (error) {
-            console.error('Error de red:', error);
+            console.error('Error', error);
+            const message = error?.message ?? "Uknown error, please contact us on support@axo.mx"
+
+            return {color:"error",isOnError:true, message:message}; 
         }
     }
 
@@ -81,3 +97,5 @@ export const useUserStore = defineStore('users',() => {
     }
     return { login, register, logout, user }
 })
+    
+
