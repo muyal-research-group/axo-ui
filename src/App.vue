@@ -1,23 +1,20 @@
 <template>
-  <v-app class="urbanist-font">
+  <v-app>
     <!-- App Bar -->
     <template v-if="!isAuthRoute">
-      <v-app-bar app fixed class="bg-color text-white">
+      <v-app-bar app fixed color="#06141b" class="text-white" style="z-index: 1;">
         <div class="d-flex justify-start">
           <v-img
             @click="router.push('/home')"
             :width="45"
-            :src="require('@/assets/logo.png')"
+            :src="logo"
             class="ml-5 clickable"
           ></v-img>
         </div>
-        <!-- nav icon in small screens -->
         <template v-if="$vuetify.display.smAndDown">
-          <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer">
-          </v-app-bar-nav-icon>
+          <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         </template>
         <v-spacer></v-spacer>
-        <!-- Popover Menu -->
         <div class="d-flex">
           <popoverMenu />
         </div>
@@ -28,7 +25,7 @@
         app
         :expand-on-hover="!$vuetify.display.smAndDown"
         :rail="!$vuetify.display.smAndDown"
-        class="bg-color-nav-drawer"
+        color="#11212d"
         :location="$vuetify.display.mobile ? 'left' : undefined"
       >
         <v-divider></v-divider>
@@ -78,16 +75,17 @@
     </v-main>
 
     <!-- Footer -->
-    <v-footer app v-if="!isAuthRoute">
+    <v-footer app v-if="!isAuthRoute" style="z-index: 1;">
       <span class="text-grey"> </span>
     </v-footer>
-  </v-app>
+ </v-app>
 </template>
 
 <script setup>
 import PopoverMenu from "./components/PopoverMenu.vue";
 import { ref, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import logo from '@/assets/logo.png';
 
 const drawer = ref(true);
 
@@ -108,18 +106,5 @@ const isAuthRoute = computed(() => {
 .clickable {
   cursor: pointer;
 }
-.urbanist-font {
-  font-family: "Urbanist", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-}
 
-.bg-color {
-  background-color: #06141b;
-}
-
-.bg-color-nav-drawer {
-  background-color: #11212d;
-}
 </style>

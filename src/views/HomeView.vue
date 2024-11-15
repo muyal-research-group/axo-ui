@@ -1,9 +1,9 @@
 <template>
     <!-- main -->
-        <v-main 
+       <!--  <v-main 
         class="d-flex-column justify-center align-center pa-5"
         style="min-height: 300px;"
-        >
+        > -->
             <v-container>
                 <div class="d-flex flex-column">
                 <div class="d-flex">
@@ -36,7 +36,7 @@
                 </div>           
             </div>        
             </v-container>           
-        </v-main>
+        <!-- </v-main> -->
 </template>
 
 <script setup>

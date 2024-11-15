@@ -3,7 +3,6 @@
     class="d-flex flex-column align-center justify-center bg-color-main h-100"
     style="min-height: 300px"
   >
-    <!-- <CardNotification /> -->
     <v-sheet
       width="450"
       class="d-flex flex-column align-center justify-center pa-5 rounded-lg"
@@ -16,7 +15,7 @@
         color="#06141B"
         style="border-radius: 50%; position: absolute; top: -50px; z-index: 10"
       >
-        <v-img src="@/assets/logo.png"></v-img>
+        <v-img :src="logo"></v-img>
       </v-sheet>
       <!--formulario -->
       <v-form fast-fail @submit.prevent="SignIn" class="w-100 mt-8 pa-8">
@@ -55,12 +54,13 @@
           <v-btn
             :loading="isLoading"
             :disabled="isLoading"
-            class="btn-color w-100 text-white mb-5"
+            color="#06141b"
+            class="w-100 text-white mb-5"
             type="submit"
             >Login</v-btn
           >
-          <div>
-            <v-text class="text-disabled"> Don't have an account?</v-text>
+          <div class="d-flex">
+            <p class="text-disabled"> Don't have an account? </p>
             <router-link
               to="/register"
               class="text-decoration-none font-weight-bold"
@@ -88,6 +88,7 @@
 import { reactive, ref } from "vue";
 import { useUserStore } from "@/store/user";
 import { useRouter } from "vue-router";
+import logo from '@/assets/logo.png';
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -121,9 +122,6 @@ const SignIn = async () => {
 </script>
 
 <style scoped>
-.btn-color {
-  background-color: #06141b;
-}
 .bg-color-main {
   background-color: #eeeaea;
 }

@@ -10,7 +10,7 @@
                 color="#06141B"
                 style="border-radius: 50%; position: absolute; top: -50px; z-index: 10;"
             >
-            <v-img src="@/assets/logo.png"></v-img>
+            <v-img :src="logo"></v-img>
             </v-sheet>
             <!--formulario del registro de usuarios-->
             <v-form fast-fail @submit.prevent="SignUp" class="w-100 mt-8 pa-3">
@@ -84,7 +84,8 @@
                     <v-btn
                     :loading="isLoading"
                     :disabled="isLoading"
-                    class="btn-color w-100 text-white mb-5" 
+                    color="#06141B"
+                    class="w-100 text-white mb-5" 
                     type="submit" >Sign Up</v-btn>
                     <div>
                         <v-text class="text-disabled">Already on Axo?</v-text>
@@ -112,6 +113,7 @@
     import { reactive,ref } from 'vue';
     import { useUserStore } from '@/store/user';
     import { useRouter } from 'vue-router';
+    import logo from '@/assets/logo.png';
 
     const router = useRouter();
     const userStore = useUserStore();
@@ -173,9 +175,6 @@
 </script>
 
 <style scoped>
-.btn-color{
-    background-color: #06141B;
-}
 .bg-color-main{
   background-color: #EEEAEA;
 }
