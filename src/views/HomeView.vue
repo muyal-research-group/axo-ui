@@ -15,20 +15,20 @@
         <v-divider></v-divider>
         <div class="mt-5 pa-5">
           <CardVariant
-            v-for="(object, id) in objects"
+            v-for="(service, id) in services_store.services"
             :key="id"
-            :title="object.title"
-            :description="object.description"
-            :autor="object.autor"
+            :title="`Service ${service.service_id}`"
+            :description="`${service.resources.cpu} core ${service.resources.cpu>1 ? 's':''} /${service.resources.ram}`"
+            :autor="service.created_at"
           >
             <!-- boton agregar -->
             <template #button>
               <button
-                @click="handleAdd(object)"
-                :class="object.added ? 'btn-added' : 'btn-add'"
-                :disabled="object.added"
+                @click="handleAdd(service)"
+                :class="service.added ? 'btn-added' : 'btn-add'"
+                :disabled="service.added"
               >
-                {{ object.added ? "Added" : "Add" }}
+                {{ service.added ? "Added" : "Add" }}
               </button>
             </template>
           </CardVariant>
@@ -41,35 +41,33 @@
 <script setup>
 import SearchBar from "@/components/SearchBar.vue";
 import CardVariant from "@/components/CardVariant.vue";
-import { ref } from "vue";
+import {useServicesStore} from "@/store/services"
+import { ref, onMounted} from "vue";
+
+const services_store = useServicesStore()
+// const services = ref([])
+
+
+onMounted(async ()=>{
+  const result = await services_store.get_services()
+  // services.value = result.services.value
+
+
+})
 
 const currentSearch = ref("");
 const handleSearch = (search) => {
   currentSearch.value = search;
 };
 
-const objects = ref([
-  {
-    id: 1,
-    title: "Object 1",
-    description: "Description",
-    autor: "User",
-    added: false,
-  },
-  {
-    id: 2,
-    title: "Object 2",
-    description: "Description",
-    autor: "User",
-    added: false,
-  },
-]);
 
-//funcion boton para agregar
-const handleAdd = (object) => {
-  object.added = !object.added;
-};
+
 </script>
+
+
+
+
+
 
 <style scoped>
 .btn-add {
