@@ -56,7 +56,21 @@
             prepend-icon="mdi-grid"
             title="My Endpoints"
             value="myEndpoints"
-            @click="navigateTo('/my-objects')"
+            @click="navigateTo('/endpoints')"
+          ></v-list-item>
+          <v-list-item
+            link
+            prepend-icon="mdi-grid"
+            title="My Microservices"
+            value="myMicroservices"
+            @click="navigateTo('/microservices')"
+          ></v-list-item>
+          <v-list-item
+            link
+            prepend-icon="mdi-grid"
+            title="My Functions"
+            value="myFunctions"
+            @click="navigateTo('/functions')"
           ></v-list-item>
           <v-spacer></v-spacer>
           <v-list-item
