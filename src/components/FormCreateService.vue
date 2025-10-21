@@ -37,28 +37,29 @@
       <!-- Recursos -->
       <v-row>
         <v-col cols="6">
-          <v-text-field
+          <v-number-input
             v-model="servicesStore.form.resources.cpu"
             label="CPU"
-            type="number"
             variant="filled"
             :rules="[rules.required]"
             required
             prepend-inner-icon="mdi-chip"
+            min="1"
           />
         </v-col>
+
         <v-col cols="6">
-          <v-text-field
-            v-model="servicesStore.form.resources.ram"
-            label="RAM (e.g. 1GB)"
+          <v-number-input
+            v-model="ramNumber"
+            label="RAM"
             variant="filled"
             :rules="[rules.required]"
             required
             prepend-inner-icon="mdi-memory"
+            min="1"
           />
         </v-col>
       </v-row>
-
 
       <!-- Botón Guardar -->
       <div class="d-flex mt-4">
@@ -125,6 +126,19 @@ const associatedMicroservices = computed(() => {
   )
 })
 
+// --- RAM Number + Computed para enviar string "4GB" ---
+const ramNumber = ref(
+  servicesStore.form.resources?.ram
+    ? parseInt(servicesStore.form.resources.ram.replace("GB", ""))
+    : 1
+)
+const ramString = computed({
+  get: () => `${ramNumber.value}GB`,
+  set: val => {
+    ramNumber.value = parseInt(val.replace("GB", "")) || 1
+  }
+})
+
 // --- Cargar formulario ---
 const loadForm = (editQuery) => {
   if (editQuery) {
@@ -132,14 +146,29 @@ const loadForm = (editQuery) => {
     const serviceToEdit = servicesStore.services.find(s => s.service_id === editQuery)
     if (serviceToEdit) {
       servicesStore.form = { ...serviceToEdit }
+      
+      // Inicializar CPU si está vacío o cero
+      if (!serviceToEdit.resources?.cpu || serviceToEdit.resources.cpu < 1) {
+        servicesStore.form.resources.cpu = 1
+      }
+
+      // Inicializar RAM
+      if (serviceToEdit.resources?.ram) {
+        ramNumber.value = parseInt(serviceToEdit.resources.ram.replace("GB", "")) || 1
+      }
     }
   } else {
     isEditing.value = false
     servicesStore.resetForm()
     formRef.value.resetValidation()
     isValid.value = false
+
+    // Inicializar valores por defecto
+    servicesStore.form.resources.cpu = 1
+    ramNumber.value = 1
   }
 }
+
 
 // --- Al montar ---
 onMounted(async () => {
@@ -161,10 +190,14 @@ onBeforeUnmount(() => {
   servicesStore.resetForm()
   formRef.value.resetValidation()
   isValid.value = false
+  ramNumber.value = 1
 })
 
 // --- Guardar ---
 const save = async () => {
+  // --- Convertir RAM a string "4GB" antes de enviar ---
+  servicesStore.form.resources.ram = ramString.value
+
   let result
   if (isEditing.value) {
     result = await servicesStore.update_service(route.query.edit)
@@ -182,6 +215,8 @@ const save = async () => {
     }
     formRef.value.resetValidation()
     if (!isEditing.value) servicesStore.resetForm()
+    //reset ramNumber
+    if (!isEditing.value) ramNumber.value = 1
   } else {
     snackbar.value = { show: true, text: 'Error: ' + result.message, color: 'error' }
   }

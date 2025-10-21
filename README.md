@@ -27,6 +27,31 @@ npm install
 
 ---
 
+## 🛠️ Configuration with Environment Variables
+
+This project uses environment variables to configure API URLs and versions. This allows you to run the UI in different environments without changing the source code.
+
+### Step 1: Copy the development environment file
+```sh
+cp .env.dev .env.local
+```
+
+### Step 2: Edit .env.local to configure variables as needed
+```env
+# CryptoMesh API
+VITE_CRYPTOMESH_URL=http://localhost:19000
+VITE_CRYPTOMESH_API_VERSION=v1
+
+# ShieldX API (Choreography)
+VITE_SHIELDX_URL=http://localhost:20000
+VITE_API_VERSION=v1
+
+# Axo_Backend
+VITE_AXO_BACKEND_URL=http://localhost:17000
+```
+
+---
+
 ## ▶️ Usage
 ### Run development server:
 ```sh

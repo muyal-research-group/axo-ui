@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { AXO_BACKEND_URL,FETCH_CREDENTIALS } from "@/config";
 
 export const useUserStore = defineStore('users',() => {
     const user = ref({})
@@ -20,17 +21,31 @@ export const useUserStore = defineStore('users',() => {
                 status:0
             }
             console.log("BODY", body)
-            const response = await fetch ('http://localhost:17000/auth', {
+            const response = await fetch (`${AXO_BACKEND_URL}/auth`, {
                 method: 'POST',
+                credentials: FETCH_CREDENTIALS,
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(body),
             })
             if (response.ok) {
-                user.value = await response.json();
+                const data = await response.json();
+
+            const token =
+                    data?.token ??
+                    data?.access_token ??
+                    data?.credentials?.token ??
+                    data?.user?.token ??
+                    null;
+            
                 
-                return {color:"success",isOnError:false, message:"Login successfully completed."}; 
+                    user.value = data?.user ?? data;
+            
+                
+                    if (token) localStorage.setItem('auth_token', token);
+            
+            return { color:"success", isOnError:false, message:"Login successfully completed.", token };
             } else {
                 const message = (await response.json())?.detail ?? "Uknown error."
                 // await (response.json().then(x=>x["detail"]) )
@@ -70,8 +85,9 @@ export const useUserStore = defineStore('users',() => {
                     }
             }
             console.log("BODY",body)
-            const response = await fetch('http://localhost:17000/auth/signup', {
+            const response = await fetch(`${AXO_BACKEND_URL}/auth/signup`, {
                 method: 'POST',
+                credentials: FETCH_CREDENTIALS,
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -93,7 +109,9 @@ export const useUserStore = defineStore('users',() => {
 
     //funcion logout
     function logout () {
-        user.value = null;
+        user.value = {};
+        // limpia el token para que el guard bloquee rutas protegidas
+        localStorage.removeItem('auth_token');
     }
     return { login, register, logout, user }
 },

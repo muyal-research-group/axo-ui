@@ -1,9 +1,8 @@
 import { defineStore } from "pinia"
 import { ref } from "vue"
-import yaml from "js-yaml"   // 👈 asegúrate de importar yaml aquí también
+import yaml from "js-yaml"
+import { SHIELDX_URL, API_VERSION,CRYPTOMESH_URL, CRYPTOMESH_API_VERSION,FETCH_CREDENTIALS } from "@/config"
 
-const SHIELDX_URL = `http://localhost:20000`
-const API_VERSION = `v1`
 
 export const useChoreographyStore = defineStore("choreography", () => {
   const loading = ref(false)
@@ -14,6 +13,7 @@ export const useChoreographyStore = defineStore("choreography", () => {
       const response = await fetch(`${SHIELDX_URL}/api/${API_VERSION}/interpret`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: FETCH_CREDENTIALS,
         body: JSON.stringify(choreographyJson),
       })
 
@@ -34,11 +34,12 @@ export const useChoreographyStore = defineStore("choreography", () => {
   async function interpretChoreographyYaml(choreographyObj) {
     loading.value = true
     try {
-      const yamlContent = yaml.dump(choreographyObj)   // 👈 convierte el objeto a texto YAML
+      const yamlContent = yaml.dump(choreographyObj)   
 
       const response = await fetch(`${SHIELDX_URL}/api/${API_VERSION}/interpret/yaml`, {
         method: "POST",
         headers: { "Content-Type": "application/x-yaml" },
+        credentials: FETCH_CREDENTIALS,
         body: yamlContent,
       })
 
@@ -57,9 +58,10 @@ export const useChoreographyStore = defineStore("choreography", () => {
   async function sendGraph(graphJson) {
     loading.value = true
     try {
-      const response = await fetch(`${SHIELDX_URL}/api/${API_VERSION}/choreography/run`, {
+      const response = await fetch(`${CRYPTOMESH_URL}/api/${CRYPTOMESH_API_VERSION}/choreography/run`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: FETCH_CREDENTIALS,
         body: JSON.stringify(graphJson),
       })
 

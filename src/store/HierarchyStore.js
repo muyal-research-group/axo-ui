@@ -2,12 +2,10 @@
 import { defineStore } from "pinia"
 import { ref } from "vue"
 import OA from "@/assets/axo_OA_assets.png"
-import micro from "@/assets/axo_microser_assets.png"
 import icon_ser from "@/assets/axo_service_assets.png"
+import micro from "@/assets/axo_microser_assets.png"
 import ao_function from "@/assets/axo_function.png"
-
-const CRYPTOMESH_URL = `http://localhost:19000`
-const CRYPTOMESH_API_VERSION = `v1`
+import { CRYPTOMESH_URL, CRYPTOMESH_API_VERSION,FETCH_CREDENTIALS } from "@/config"
 
 function mapHierarchyToTree(data) {
   return data.map(service => ({
@@ -63,7 +61,7 @@ export const useHierarchyStore = defineStore("hierarchy", () => {
         loading.value = true
         error.value = null
         try {
-            const res = await fetch(`${CRYPTOMESH_URL}/api/${CRYPTOMESH_API_VERSION}/hierarchy`)
+            const res = await fetch(`${CRYPTOMESH_URL}/api/${CRYPTOMESH_API_VERSION}/hierarchy`,{ credentials: FETCH_CREDENTIALS })
             if (!res.ok) throw new Error("Failed to fetch hierarchy")
             const data = await res.json()
             rawData.value = data
